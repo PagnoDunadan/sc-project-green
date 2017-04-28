@@ -89,4 +89,4 @@ ENV/
 .ropeproject
 
 # Ignore private stuff
-/private.py
+private.py
