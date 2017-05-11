@@ -1,2 +1,2 @@
 # sc-project-green
-SpringCamp project for Green Team
+SpringCamp project for Green Team #MaliZeleni
