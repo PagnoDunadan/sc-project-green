@@ -2,21 +2,33 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}Learn.com | Free online courses{% endblock %}</title>
   </head>
   <body>
+  <div class="page">
     <header>
-      <h1>My Site</h1>
+      <a href="{% url 'home' %}">Home</a>
+      <a href="{% url 'courses:courses' %}">Courses</a>
+
       {% if user.is_authenticated %}
-        <a href="{% url 'logout' %}">logout</a>
+       <a>Logged in as: {{request.user}}</a><br>
+       <a href="{% url 'logout' %}">Logout</a>
+
       {% else %}
-        <a href="{% url 'login' %}">login</a> / <a href="{% url 'signup' %}">signup</a>
+      <a href="{% url 'signup' %}">Sign up</a><br>
+      <a href="{% url 'login' %}">Login</a>
       {% endif %}
-      <hr>
+
+      <h1>Learn.com</h1>
+
     </header>
     <main>
       {% block content %}
       {% endblock %}
     </main>
+    <footer>
+      <p style="text-align:center;">2017 Mali Zeleni</p>
+    </footer>
   </body>
 </html>
+
