@@ -1,3 +1,16 @@
 {% extends 'registration/base.html' %}
-{% block title %}Homepage{% endblock%}
 
+{% block title %}Learn.com{% endblock %}
+
+{% block content %}
+    <style>
+    button{
+        height: 200px;
+        width: 99%;
+        margin: 10px;
+    }
+    </style>
+    <a href="{% url 'signup' %}"><button id="button">Sign Up</button></a>
+    <a href="{% url 'login' %}"><button id="button">Log In</button></a>
+    <a href="{% url 'courses:courses' %}"><button id="button">Go to Courses</button></a>
+{% endblock %}

@@ -1,13 +1,23 @@
-<!-- Courses Main -->
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'courses/style.css' %}" />
-<h1> Courses </h1>
-{% if latest_courses_list %}
-	<ul>
-	{% for course in latest_courses_list %}
-	 <li><a href="{% url 'courses:detail' course.id %}">{{ course.course_name }}</a></li>
-	{% endfor %}
-	</ul>
-{% else %}
-	<p>No courses available.</p>
-{% endif %}
+{% extends 'registration/base.html' %}
+
+{% block title %}Courses - Learn.com{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'courses/style.css' %}" />
+    <h1> Courses </h1>
+    <a style="float:right;" href="{% url 'courses:create_course' %}">Start a course</a>
+    {% if latest_courses_list %}
+        <ul>
+        {% for course in latest_courses_list %}
+         <li>
+         <a href="{% url 'courses:course' course.id %}">{{ course.course_name }}</a>
+         <a href="{% url 'courses:update_course' course.id %}">edit</a>
+         <a href="{% url 'courses:delete_course' course.id %}">delete</a>
+         </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No courses available.</p>
+    {% endif %}
+{% endblock %}

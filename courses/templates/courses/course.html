@@ -1,0 +1,22 @@
+{% extends 'registration/base.html' %}
+
+{% block title %}Lessons - Learn.com{% endblock %}
+
+{% block content %}
+    <a style="float:left;" href="{% url 'courses:courses' %}">Back to courses</a>
+    <h1>Lessons</h1>
+    <a style="float:right;" href="{{request.path}}lesson/create">Add a lesson</a>
+    {% if latest_lessons_list %}
+        <ul>
+        {% for lesson in latest_lessons_list %}
+         <li>
+         <a href="{% url 'courses:lesson' lesson.id %}">{{ lesson.lesson_name }}</a>
+         <a href="{% url 'courses:update_lesson' lesson.id %}">edit</a>
+         <a href="{% url 'courses:delete_lesson' lesson.id %}">delete</a>
+         </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No lessons available.</p>
+    {% endif %}
+{% endblock %}
