@@ -2,10 +2,11 @@ from __future__ import unicode_literals
 from datetime import datetime
 
 from django.core.urlresolvers import reverse_lazy
-from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Course, Lesson, Text
+from django.shortcuts import get_object_or_404
+from django.views import generic
 
+from .models import Course, Lesson, Text
 
 
 class CoursesView(LoginRequiredMixin, generic.ListView):
@@ -33,23 +34,57 @@ class UpdateCourseView(LoginRequiredMixin, generic.UpdateView):
     fields = ['course_name']
     template_name_suffix = '_update_form'
 
+    def get_object(self):
+        return get_object_or_404(Course, pk=self.kwargs['course_id'])
+
     def get_success_url(self):
         return reverse_lazy('courses:courses')
+
+    def get_context_data(self, **kwargs):
+        context = super(UpdateCourseView, self).get_context_data(**kwargs)
+        context['course_id'] = self.kwargs['course_id']
+        return context
 
 
 class DeleteCourseView(LoginRequiredMixin, generic.DeleteView):
     model = Course
 
+    def get_object(self):
+        return get_object_or_404(Course, pk=self.kwargs['course_id'])
+
     def get_success_url(self):
         return reverse_lazy('courses:courses')
+
+    def get_context_data(self, **kwargs):
+        context = super(DeleteCourseView, self).get_context_data(**kwargs)
+        context['course_id'] = self.kwargs['course_id']
+        return context
 
 
 class CourseView(LoginRequiredMixin, generic.ListView):
     template_name = 'courses/course.html'
+    context_object_name = 'course'
+
+    def get_queryset(self):
+        return Course.objects.get(id=self.kwargs['course_id'])
+
+    def get_context_data(self, **kwargs):
+        context = super(CourseView, self).get_context_data(**kwargs)
+        context['course_id'] = self.kwargs['course_id']
+        return context
+
+
+class LessonsView(LoginRequiredMixin, generic.ListView):
+    template_name = 'courses/lessons.html'
     context_object_name = 'latest_lessons_list'
 
     def get_queryset(self):
-        return Lesson.objects.filter(course_id=self.kwargs['pk'])
+        return Lesson.objects.filter(course_id=self.kwargs['course_id'])
+
+    def get_context_data(self, **kwargs):
+        context = super(LessonsView, self).get_context_data(**kwargs)
+        context['course_id'] = self.kwargs['course_id']
+        return context
 
 
 class CreateLessonView(LoginRequiredMixin, generic.CreateView):
@@ -58,12 +93,17 @@ class CreateLessonView(LoginRequiredMixin, generic.CreateView):
 
     def form_valid(self, form):
         lesson = form.save(commit=False)
-        lesson.course_id = self.kwargs['pk']
+        lesson.course_id = self.kwargs['course_id']
         lesson.pub_date = datetime.now()
         return super(CreateLessonView, self).form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('courses:course', kwargs = {'pk' : self.kwargs['pk'] })
+        return reverse_lazy('courses:lessons', kwargs = {'course_id' : self.kwargs['course_id'] })
+
+    def get_context_data(self, **kwargs):
+        context = super(CreateLessonView, self).get_context_data(**kwargs)
+        context['course_id'] = self.kwargs['course_id']
+        return context
 
 
 class UpdateLessonView(LoginRequiredMixin, generic.UpdateView):
@@ -71,15 +111,33 @@ class UpdateLessonView(LoginRequiredMixin, generic.UpdateView):
     fields = ['lesson_name']
     template_name_suffix = '_update_form'
 
+    def get_object(self):
+        return get_object_or_404(Lesson, pk=self.kwargs['lesson_id'])
+
     def get_success_url(self):
-        return reverse_lazy('courses:course', kwargs = {'pk' : self.object.course_id })
+        return reverse_lazy('courses:lessons', kwargs = {'course_id' : self.object.course_id })
+
+    def get_context_data(self, **kwargs):
+        context = super(UpdateLessonView, self).get_context_data(**kwargs)
+        context['course_id'] = self.kwargs['course_id']
+        context['lesson_id'] = self.kwargs['lesson_id']
+        return context
 
 
 class DeleteLessonView(LoginRequiredMixin, generic.DeleteView):
     model = Lesson
 
+    def get_object(self):
+        return get_object_or_404(Lesson, pk=self.kwargs['lesson_id'])
+
     def get_success_url(self):
-        return reverse_lazy('courses:course', kwargs = {'pk' : self.object.course_id })
+        return reverse_lazy('courses:lessons', kwargs = {'course_id' : self.object.course_id })
+
+    def get_context_data(self, **kwargs):
+        context = super(DeleteLessonView, self).get_context_data(**kwargs)
+        context['course_id'] = self.kwargs['course_id']
+        context['lesson_id'] = self.kwargs['lesson_id']
+        return context
 
 
 class LessonView(LoginRequiredMixin, generic.ListView):
@@ -87,7 +145,13 @@ class LessonView(LoginRequiredMixin, generic.ListView):
     context_object_name = 'lesson_content'
 
     def get_queryset(self):
-        return Text.objects.filter(lesson_id=self.kwargs['pk']).order_by('-priority')
+        return Text.objects.filter(lesson_id=self.kwargs['lesson_id']).order_by('-priority')
+
+    def get_context_data(self, **kwargs):
+        context = super(LessonView, self).get_context_data(**kwargs)
+        context['course_id'] = self.kwargs['course_id']
+        context['lesson_id'] = self.kwargs['lesson_id']
+        return context
 
 
 class CreateTextView(LoginRequiredMixin, generic.CreateView):
@@ -96,23 +160,50 @@ class CreateTextView(LoginRequiredMixin, generic.CreateView):
 
     def form_valid(self, form):
         text = form.save(commit=False)
-        text.lesson_id = self.kwargs['pk']
+        text.lesson_id = self.kwargs['lesson_id']
         return super(CreateTextView, self).form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('courses:lesson', kwargs = {'pk' : self.kwargs['pk'] })
+        return reverse_lazy('courses:lesson', kwargs = {'course_id' : self.kwargs['course_id'], 'lesson_id' : self.kwargs['lesson_id'] })
+
+    def get_context_data(self, **kwargs):
+        context = super(CreateTextView, self).get_context_data(**kwargs)
+        context['course_id'] = self.kwargs['course_id']
+        context['lesson_id'] = self.kwargs['lesson_id']
+        return context
 
 
-class TextUpdate(LoginRequiredMixin, generic.UpdateView):
+class UpdateTextView(LoginRequiredMixin, generic.UpdateView):
     model = Text
     fields = ['content', 'is_video', 'priority']
     template_name_suffix = '_update_form'
 
-    def get_success_url(self):
-        return reverse_lazy('courses:lesson', kwargs = {'pk' : self.object.lesson_id })
+    def get_object(self):
+        return get_object_or_404(Text, pk=self.kwargs['text_id'])
 
-class TextDelete(LoginRequiredMixin, generic.DeleteView):
+    def get_success_url(self):
+        return reverse_lazy('courses:lesson', kwargs = {'course_id' : self.kwargs['course_id'], 'lesson_id' : self.kwargs['lesson_id'] })
+
+    def get_context_data(self, **kwargs):
+        context = super(UpdateTextView, self).get_context_data(**kwargs)
+        context['course_id'] = self.kwargs['course_id']
+        context['lesson_id'] = self.kwargs['lesson_id']
+        context['text_id'] = self.kwargs['text_id']
+        return context
+
+
+class DeleteTextView(LoginRequiredMixin, generic.DeleteView):
     model = Text
 
+    def get_object(self):
+        return get_object_or_404(Text,pk=self.kwargs['text_id'])
+
     def get_success_url(self):
-        return reverse_lazy('courses:lesson', kwargs = {'pk' : self.object.lesson_id })
+        return reverse_lazy('courses:lesson', kwargs = {'course_id' : self.kwargs['course_id'], 'lesson_id' : self.kwargs['lesson_id'] })
+
+    def get_context_data(self, **kwargs):
+        context = super(DeleteTextView, self).get_context_data(**kwargs)
+        context['course_id'] = self.kwargs['course_id']
+        context['lesson_id'] = self.kwargs['lesson_id']
+        context['text_id'] = self.kwargs['text_id']
+        return context

@@ -6,8 +6,8 @@
 
     {% load embed_video_tags %}
 
-    <a style="float:left;" href="{% url 'courses:courses' %}">Back to courses</a>
-    <a style="float:right;" href="{{request.path}}text/create">Add new content</a>
+    <a style="float:right;margin-right:10px;" href="{% url 'courses:create_text' course_id lesson_id%}">Add new content</a>
+
     <h1>Lesson content</h1>
     {% if lesson_content %}
         <ul>
@@ -15,14 +15,14 @@
             {% if text.is_video %}
                 <p style="text-align:center;">
                 {% video text.content '560x315' %}
-                <a href="{% url 'courses:text_update' text.id %}">edit</a>
-                <a href="{% url 'courses:text_delete' text.id %}">delete</a>
+                <a href="{% url 'courses:update_text' course_id lesson_id text.id %}">edit</a>
+                <a href="{% url 'courses:delete_text' course_id lesson_id text.id %}">delete</a>
                 </p>
             {% else %}
                 <p>
                 <a>{{ text.content }}</a>
-                <a href="{% url 'courses:text_update' text.id %}">edit</a>
-                <a href="{% url 'courses:text_delete' text.id %}">delete</a>
+                <a href="{% url 'courses:update_text' course_id lesson_id text.id %}">edit</a>
+                <a href="{% url 'courses:delete_text' course_id lesson_id text.id %}">delete</a>
                 </p>
             {% endif %}
         {% endfor %}

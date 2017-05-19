@@ -5,6 +5,7 @@
 {% block content %}
 <h1>Edit course</h1>
 <form action="" method="post">{% csrf_token %}
+{{kwargs}}
     {{ form.as_p }}
     <input type="button" value="Cancel" onclick="history.back(-1)" />
     <input type="submit" value="Save" />

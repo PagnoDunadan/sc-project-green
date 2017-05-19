@@ -31,7 +31,7 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', '2a106cbf.ngrok.io']
 # Application definition
 
 INSTALLED_APPS = [
-    'rules',
+    'sitetree',
     'embed_video',
     'courses.apps.CoursesConfig',
     'django.contrib.admin',
@@ -52,10 +52,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-AUTHENTICATION_BACKENDS = (
-    'rules.permissions.ObjectPermissionBackend',
-    'django.contrib.auth.backends.ModelBackend',
-)
 
 ROOT_URLCONF = 'djangoelearning.urls'
 
