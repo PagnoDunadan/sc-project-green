@@ -90,3 +90,4 @@ ENV/
 
 # Ignore private stuff
 private.py
+private_settings.py

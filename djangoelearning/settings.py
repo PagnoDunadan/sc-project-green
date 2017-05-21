@@ -25,7 +25,6 @@ SECRET_KEY = '#%v@%+6y8memq*8vrnx%hj4m+k2gw-e!n#fya31%fa$ct99#z6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '2a106cbf.ngrok.io']
 
 
 # Application definition
@@ -131,3 +130,12 @@ STATICFILES_DIRS = (
 )
 
 STATIC_URL = '/static/'
+
+try:
+    PRIVATE_SETTINGS
+except NameError:
+    try:
+	from private_settings import *
+    except ImportError:
+	pass
+	   
