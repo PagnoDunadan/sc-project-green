@@ -19,7 +19,7 @@ class CoursesView(LoginRequiredMixin, generic.ListView):
 
 class CreateCourseView(LoginRequiredMixin, generic.CreateView):
     model = Course
-    fields = ['course_name']
+    fields = ['course_name', 'course_picture']
 
     def form_valid(self, form):
         form.instance.pub_date = datetime.now()
@@ -31,7 +31,7 @@ class CreateCourseView(LoginRequiredMixin, generic.CreateView):
 
 class UpdateCourseView(LoginRequiredMixin, generic.UpdateView):
     model = Course
-    fields = ['course_name']
+    fields = ['course_name', 'course_picture']
     template_name_suffix = '_update_form'
 
     def get_object(self):

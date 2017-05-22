@@ -1,10 +1,12 @@
-{% extends 'registration/base.html' %}
+{% extends 'courses/main.html' %}
 
 {% block title %}Lessons - Learn.com{% endblock %}
 
 {% block content %}
+{% include 'course_css.html' %}
+<div class="cont_course">
+    <a class="btn btn-success btn-lg pull-right" href="{% url 'courses:create_lesson' course_id%}">Add a lesson</a>
     <h1>Lessons</h1>
-    <a style="float:right;" href="{% url 'courses:create_lesson' course_id%}">Add a lesson</a>
     {% if latest_lessons_list %}
         <ul>
         {% for lesson in latest_lessons_list %}
@@ -18,4 +20,5 @@
     {% else %}
         <p>No lessons available.</p>
     {% endif %}
+</div>
 {% endblock %}

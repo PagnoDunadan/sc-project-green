@@ -9,7 +9,7 @@
 			<div class="col-lg-4">
 				<h1>Elearning web page</h1>
 				<p><h3> eLearning is learning utilizing electronic technologies, to access educational curriculum outside of a 					traditional classroom. 
-				In most cases, it refers to a course, program or degree delivered completely online.</h3></p>
+				In most cases, it refers to a course, program or degree delivered completely online. </h3></p>
 				{% if user.is_authenticated %}
 				<a href="{% url 'courses:courses' %}">
 				<button class="btn btn-lg btn-success"><span class="glyphicon glyphicon-book"></span> Go to courses!</button>
@@ -66,7 +66,5 @@
 	<a class="right carousel-control" href="#mycarousel" role="button" data-slide="next">
 		<span class="glyphicon glyphicon-chevron-right"></span>
 	</a>
-
-
 </div>
 {% endblock %}

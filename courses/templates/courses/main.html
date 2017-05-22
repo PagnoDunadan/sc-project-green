@@ -3,21 +3,37 @@
 {% block title %}Courses - Learn.com{% endblock %}
 
 {% block content %}
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'courses/style.css' %}" />
+    {% include 'course_css.html' %}
+    <div class="cont_course">
+    <a class="btn btn-success btn-lg pull-right" href="{% url 'courses:create_course' %}">Start a course</a>
     <h1> Courses </h1>
-    <a style="float:right;" href="{% url 'courses:create_course' %}">Start a course</a>
+    <br>
     {% if latest_courses_list %}
-        <ul>
+
+        <ul class="size">
         {% for course in latest_courses_list %}
-         <li>
-         <a href="{% url 'courses:course' course.id %}">{{ course.course_name }}</a>
-         <a href="{% url 'courses:update_course' course.id %}">edit</a>
-         <a href="{% url 'courses:delete_course' course.id %}">delete</a>
-         </li>
+        
+         <div class="col-md-4">
+                <div class="thumbnail">
+                    <a href="{% url 'courses:course' course.id %}">
+                        <img src="{{ course.course_picture }}" alt="course_pic">
+                            <div>
+                                <p class="caption">{{ course.course_name }}</p>
+                            </div>
+                     </a>
+                    <a href="{% url 'courses:update_course' course.id %}">
+                    <button class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
+                    </a>
+                    
+                    <a href="{% url 'courses:delete_course' course.id %}">
+                    <button class="btn btn-default pull-right"><span class="glyphicon glyphicon-remove"></span> </button>
+                    </a>
+                </div>
+            </div>
         {% endfor %}
         </ul>
     {% else %}
         <p>No courses available.</p>
+    </div>
     {% endif %}
 {% endblock %}

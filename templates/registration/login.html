@@ -3,11 +3,15 @@
 {% block title %}Login - Learn.com{% endblock %}
 
 {% block content %}
-  <h2>Login</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-    Not a user yet? <a href="{% url 'signup' %}">Create account</a>
-  </form>
+<br>
+  <div class="login">
+  	<h2>Login</h2>
+  	<form method="post">
+   	 {% csrf_token %}
+    	<br>
+    	{{ form.as_p }}
+    	<button type="submit" class="btn btn-success btn-lg">Login</button>
+    	Not a user yet? <a href="{% url 'signup' %}">Create account</a>
+  	</form>
+  	</div>
 {% endblock %}

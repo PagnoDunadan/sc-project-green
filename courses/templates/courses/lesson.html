@@ -1,14 +1,17 @@
-{% extends 'registration/base.html' %}
+{% extends 'courses/main.html' %}
 
 {% block title %}Lesson - Learn.com{% endblock %}
 
 {% block content %}
+{% include 'course_css.html' %}
+<div class="cont_course">
 
     {% load embed_video_tags %}
 
-    <a style="float:right;margin-right:10px;" href="{% url 'courses:create_text' course_id lesson_id%}">Add new content</a>
+    <a class="btn btn-success btn-lg pull-right" href="{% url 'courses:create_text' course_id lesson_id%}">Add new content</a>
 
     <h1>Lesson content</h1>
+    <br>
     {% if lesson_content %}
         <ul>
         {% for text in lesson_content %}
@@ -30,5 +33,5 @@
     {% else %}
         <p>No text available.</p>
     {% endif %}
-
+</div>
 {% endblock %}

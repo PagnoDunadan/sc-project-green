@@ -3,13 +3,14 @@
 <head>
   <meta charset="utf-8">
   <title>{% block title %}{% endblock %}</title>
+	<link rel="shortcut icon" type="image/png" href="/static/img/logo2.png"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="/static/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/static/css/custom.css" rel="stylesheet">
+	{% include 'css.html' %}
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Inknut+Antiqua" rel="stylesheet">
+	
 </head>
 
 <body>
@@ -29,7 +30,17 @@
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
 						<li class="active"><a href="{%url 'home' %}">Home</a></li>
-						<li><a href="{%url 'courses:courses' %}">Courses</a></li>	
+						<li><a href="{%url 'courses:courses' %}">Courses</a></li>
+						{% if user.is_authenticated %}
+						<div class="dropdown">
+ 						 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Logged in as {{ request.user }}
+    						<span class="caret"></span>
+  						</button>
+  						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+   							<li><a class="glyphicon glyphicon-off" href="{% url 'logout' %}"> Logout</a></li>
+  							</ul>
+						</div>
+						{% endif %}
 					</ul>	
 				</div>
 			</div>

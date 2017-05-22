@@ -1,8 +1,12 @@
-{% extends 'registration/base.html' %}
+{% extends 'courses/main.html' %}
 
 {% block title %}Course - Learn.com{% endblock %}
 
 {% block content %}
+{% include 'course_css.html' %}
+<div class="cont_course">
     <h1>{{course.course_name}}</h1>
     <a href="{% url 'courses:lessons' course.id %}">Lekcije</a>
+</div>
 {% endblock %}
+

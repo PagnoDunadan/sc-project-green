@@ -7,6 +7,7 @@ class Course(models.Model):
     course_name = models.CharField(max_length=100)
     pub_date = models.DateTimeField('date published')
     owner = models.CharField(max_length=100, null=True)
+    course_picture = models.URLField(max_length=300)
 
     def __str__(self):
         return self.course_name

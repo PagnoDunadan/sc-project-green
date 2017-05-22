@@ -1,3 +1,16 @@
-li a {
+h1 {
 	color: green;
+	text-align: center;
+	font-family: sans-serif;
+}
+
+.cont_course {
+	margin-top: 5%;
+	margin-left: 16%;
+	margin-right: 16%;
+}
+
+.caption{
+	font-size: 110%;
+	text-align: center;
 }
