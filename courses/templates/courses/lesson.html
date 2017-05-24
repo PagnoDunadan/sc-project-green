@@ -8,7 +8,9 @@
 
     {% load embed_video_tags %}
 
+    {% if user.id == course_owner %} <!--######################-->
     <a class="btn btn-success btn-lg pull-right" href="{% url 'courses:create_text' course_id lesson_id%}">Add new content</a>
+    {% endif %} <!--######################-->
 
     <h1>Lesson content</h1>
     <br>
@@ -18,14 +20,18 @@
             {% if text.is_video %}
                 <p style="text-align:center;">
                 {% video text.content '560x315' %}
+                {% if user.id == course_owner %} <!--######################-->
                 <a href="{% url 'courses:update_text' course_id lesson_id text.id %}">edit</a>
                 <a href="{% url 'courses:delete_text' course_id lesson_id text.id %}">delete</a>
+                {% endif %} <!--######################-->
                 </p>
             {% else %}
                 <p>
                 <a>{{ text.content }}</a>
+                {% if user.id == course_owner %} <!--######################-->
                 <a href="{% url 'courses:update_text' course_id lesson_id text.id %}">edit</a>
                 <a href="{% url 'courses:delete_text' course_id lesson_id text.id %}">delete</a>
+                {% endif %} <!--######################-->
                 </p>
             {% endif %}
         {% endfor %}

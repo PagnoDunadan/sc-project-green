@@ -5,8 +5,13 @@
 {% block content %}
 {% include 'course_css.html' %}
 <div class="cont_course">
+    {% if user == course.course_owner %}
+    <a href="{% url 'courses:update_course' course.id %}">edit</a>      <!--########################################-->
+    <a href="{% url 'courses:delete_course' course.id %}">delete</a>    <!--########################################-->
+    {% endif %}
     <h1>{{course.course_name}}</h1>
+    <img src="{{course.course_picture}}">     <!--########################################-->
+    <p>{{course.course_about}}</p>          <!--########################################-->
     <a href="{% url 'courses:lessons' course.id %}">Lekcije</a>
 </div>
 {% endblock %}
-

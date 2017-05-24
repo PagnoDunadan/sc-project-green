@@ -1,0 +1,27 @@
+{% extends 'registration/base.html' %}
+
+{% block title %}Exam - Learn.com{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'courses/style.css' %}" />
+    <h1> Exam </h1>
+    <a style="float:right;" href="{% url 'courses:new_question' course_id %}">New Question</a>
+    {% if questions_list %}
+        <ul>
+        {% for question in questions_list %}
+         <li>
+         <h3 style="display: inline;">{{ question.question }}</h3>
+         <a href="{% url 'courses:update_question' course_id question.id %}">update</a>
+         <a href="{% url 'courses:delete_question' course_id question.id %}">delete</a>
+         <p>{{ question.first_answer }}</p>
+         <p>{{ question.second_answer }}</p>
+         <p>{{ question.third_answer }}</p>
+         <p>{{ question.fourth_answer }}</p>
+         </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No questions available.</p>
+    {% endif %}
+{% endblock %}

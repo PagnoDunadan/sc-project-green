@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head >
+<style>
+body {
+    margin: 0px;
+}
+.image { 
+   position: relative; 
+   width: 100%; /* for IE 6 */
+}
+
+h2 { 
+   position: absolute; 
+   top: 780px; 
+   left: 120px; 
+   width: 100%; 
+}
+h2 span { 
+   color: white; 
+   font: bold 24px/45px Helvetica, Sans-Serif; 
+   letter-spacing: -1px;  
+   background: rgb(0, 0, 0); /* fallback color */
+   background: rgba(0, 0, 0, 0.7);
+   padding: 10px; 
+}
+h2 span.spacer {
+   padding:0 5px;
+}
+</style>
+    <link rel="shortcut icon" type="image/png" href="/static/img/logo2.png"/>
+    <meta charset="utf-8" http-equiv="refresh" content="10;url={% url 'home' %}" />
+    <title>404 Not Found - Learn.com</title>
+</head>
+<body>
+    <div class="image">
+      <img src="https://images7.alphacoders.com/377/thumb-1920-377754.jpg">
+      <h2><span>“Looking? Found someone you have, eh?”<span class='spacer'></span><br />
+      <span class='spacer'></span> – Yoda</span></h2>
+    </div>
+</body>
+</html>
