@@ -46,11 +46,14 @@ p{
 body{
 	padding-top: 0;
 	padding-bottom: 0;
+	background-color: #f1f1f6;
 }
 h1{
 	font-size: 55px;
 	font-family: 'Inknut Antiqua', serif;
 	font-weight: 700;
+	margin-top: 0;
+	padding-top: 0;
 }
 
 h3, h4{
@@ -148,4 +151,13 @@ h3, h4{
 
 .login {
 	margin-left: 16%;
+}
+
+.breadcrumbs li{
+	display: inline;
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-bottom: 0;
+	padding-bottom: 0;
+	font-family: 'Open Sans', sans-serif;
 }

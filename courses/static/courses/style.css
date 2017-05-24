@@ -8,9 +8,30 @@ h1 {
 	margin-top: 5%;
 	margin-left: 16%;
 	margin-right: 16%;
+	padding-bottom: 2.5%;
 }
 
 .caption{
 	font-size: 110%;
+	text-align: center;
+	word-break: break-all;
+}
+
+img.course_pic {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+.btn {
+	margin-left: 5px;
+}
+
+
+h1.word-size {
+	word-break: break-all;
+}
+
+p.video-align {
 	text-align: center;
 }

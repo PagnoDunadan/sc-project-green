@@ -18,19 +18,19 @@
         <ul>
         {% for text in lesson_content %}
             {% if text.is_video %}
-                <p style="text-align:center;">
-                {% video text.content '560x315' %}
-                {% if user.id == course_owner %} <!--######################-->
-                <a href="{% url 'courses:update_text' course_id lesson_id text.id %}">edit</a>
-                <a href="{% url 'courses:delete_text' course_id lesson_id text.id %}">delete</a>
+                <p class="video-align">
+                {% video text.content '800x450' %}
+                {% if user.id == course_owner %}<!--######################-->
+                <a href="{% url 'courses:update_text' course_id lesson_id text.id %}"><button type="button" class="btn btn-default btn-sm">Edit</button></a>
+                <a href="{% url 'courses:delete_text' course_id lesson_id text.id %}"><button type="button" class="btn btn-default btn-sm">Delete</button></a>
                 {% endif %} <!--######################-->
                 </p>
             {% else %}
                 <p>
-                <a>{{ text.content }}</a>
+                <div>{{ text.content }}</div>
                 {% if user.id == course_owner %} <!--######################-->
-                <a href="{% url 'courses:update_text' course_id lesson_id text.id %}">edit</a>
-                <a href="{% url 'courses:delete_text' course_id lesson_id text.id %}">delete</a>
+                <a href="{% url 'courses:update_text' course_id lesson_id text.id %}"><button type="button" class="btn btn-default btn-sm">Edit</button></a>
+                <a href="{% url 'courses:delete_text' course_id lesson_id text.id %}"><button type="button" class="btn btn-default btn-sm">Delete</button></a>
                 {% endif %} <!--######################-->
                 </p>
             {% endif %}
