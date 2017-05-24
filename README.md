@@ -1,7 +1,7 @@
 # Introduction
 SpringCamp project for Green Team #MaliZeleni <br />
 Learn.com is an elearning web application with implemented courses to help you learn better and faster. <br />
-![myimage-alt-tag](/static/img/homepage.jpg)
+![myimage-alt-tag](/static/img/homepage.png)
 
 # Installation
 $ git clone https://github.com/ExtensionEngine/sc-project-green.git <br />
