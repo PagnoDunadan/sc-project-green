@@ -1,11 +1,11 @@
-{% extends 'registration/base.html' %}
+{% extends 'courses/main.html' %}
 
 {% block title %}Exam - Learn.com{% endblock %}
 
 {% block content %}
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'courses/style.css' %}" />
-    <h1> Exam </h1>
+{% include 'course_css.html' %}
+<div class="cont_course">
+    <h1> Exam </h1><br>
 
     <form action="{% url 'courses:submit_exam' course_id %}" method="post">
     {% csrf_token %}
@@ -28,12 +28,18 @@
             <label for="{{question}}_fourth_answer">{{ question.fourth_answer }}</label><br />
              </li>
         {% endfor %}
-        <input type="submit" value="Submit" />
-        <input type="button" value="Cancel" onclick="window.location='{% url 'courses:exam' course_id %}';" />
+
+        <a>
+            <button class="btn btn-lg btn-success" type="submit"><span class="glyphicon glyphicon-ok"></span> Submit</button>
+        </a>
+        <a>
+            <button class="btn btn-default btn-lg" type="button" onclick="window.location='{% url 'courses:exam' course_id %}';"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+        </a>
     </form>
 
         </ul>
     {% else %}
         <p>No questions available.</p>
     {% endif %}
+</div>
 {% endblock %}

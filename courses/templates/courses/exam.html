@@ -1,23 +1,24 @@
-{% extends 'registration/base.html' %}
+{% extends 'courses/main.html' %}
 
 {% block title %}Exam - Learn.com{% endblock %}
 
 {% block content %}
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'courses/style.css' %}" />
-    <h1> Exam </h1>
+    {% include 'course_css.html' %}
+    <div class="cont_course">
+    
     {% if user.id == course_owner %}
-    <a style="float:right;" href="{% url 'courses:new_question' course_id %}">New Question</a>
+    <a class="btn btn-success btn-lg pull-right" href="{% url 'courses:new_question' course_id %}">Add new question</a>
     {% endif %}
+    <h1> Exam </h1>
     {% if questions_list %}
         <ul>
-        <a style="float:right;" href="{% url 'courses:start_exam' course_id %}">Start Exam</a>
+        <a class="btn btn-default btn-lg pull-right" href="{% url 'courses:start_exam' course_id %}"><span class="glyphicon glyphicon-check"></span> Start Exam</a>
         {% for question in questions_list %}
          <li>
-         <h3 style="display: inline;">{{ question.question }}</h3>
+         <br><h3 style="display: inline;">{{ question.question }}</h3>
          {% if user.id == course_owner %}
-         <a href="{% url 'courses:update_question' course_id question.id %}">update</a>
-         <a href="{% url 'courses:delete_question' course_id question.id %}">delete</a>
+            <a href="{% url 'courses:update_question' course_id question.id %}"><button type="button" class="btn btn-default btn-xs">Edit</button></a>
+            <a href="{% url 'courses:delete_question' course_id question.id %}"><button type="button" class="btn btn-default btn-xs">Delete</button></span></a>
          {% endif %}
          <p>{{ question.first_answer }}</p>
          <p>{{ question.second_answer }}</p>
@@ -29,4 +30,5 @@
     {% else %}
         <p>No questions available.</p>
     {% endif %}
+    </div>
 {% endblock %}
