@@ -22,4 +22,7 @@ urlpatterns = [
     url(r'^(?P<course_id>[0-9]+)/exam/questions/new$', views.CreateQuestionView.as_view(), name='new_question'), # /courses/1/exam/questions/new
     url(r'^(?P<course_id>[0-9]+)/exam/questions/(?P<question_id>[0-9]+)/update$', views.UpdateQuestionView.as_view(), name='update_question'), # /courses/1/exam/questions/1/update
     url(r'^(?P<course_id>[0-9]+)/exam/questions/(?P<question_id>[0-9]+)/delete$', views.DeleteQuestionView.as_view(), name='delete_question'), # /courses/1/exam/questions/1/delete
+    url(r'^(?P<course_id>[0-9]+)/exam/start/$', views.StartExam.as_view(), name='start_exam'), # /courses/1/exam/start/
+    url(r'^(?P<course_id>[0-9]+)/exam/submit/$', views.SubmitExam, name='submit_exam'), # /courses/1/exam/submit/
+    url(r'^(?P<course_id>[0-9]+)/exam/start/(?P<slug>[\w-]+)/$', views.StartExam.as_view(), name='exam_error'), # /courses/1/exam/start/error/
 ]

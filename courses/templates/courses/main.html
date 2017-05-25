@@ -21,6 +21,7 @@
                                 <p class="caption">{{ course.course_name }}</p>
                             </div>
                      </a>
+                     {% if user == course.course_owner %}
                     <a href="{% url 'courses:update_course' course.id %}">
                     <button class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
                     </a>
@@ -28,6 +29,7 @@
                     <a href="{% url 'courses:delete_course' course.id %}">
                     <button class="btn btn-default pull-right"><span class="glyphicon glyphicon-trash"></span> </button>
                     </a>
+                    {% endif %}
                 </div>
             </div>
         {% endfor %}

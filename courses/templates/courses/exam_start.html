@@ -1,0 +1,39 @@
+{% extends 'registration/base.html' %}
+
+{% block title %}Exam - Learn.com{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'courses/style.css' %}" />
+    <h1> Exam </h1>
+
+    <form action="{% url 'courses:submit_exam' course_id %}" method="post">
+    {% csrf_token %}
+        {% if questions_list %}
+            {% if error_message == "noanswer" %}<p>You must answer all questions.</p>{% endif %}
+            <ul>
+            {% for question in questions_list %}
+             <li>
+             <h3>{{ question.question }}</h3>
+            <input type="radio" name="{{question.id}}" id="{{question}}_first_answer" value="1" />
+            <label for="{{question}}_first_answer">{{ question.first_answer }}</label><br />
+
+            <input type="radio" name="{{question.id}}" id="{{question}}_second_answer" value="2" />
+            <label for="{{question}}_second_answer">{{ question.second_answer }}</label><br />
+
+            <input type="radio" name="{{question.id}}" id="{{question}}_third_answer" value="3" />
+            <label for="{{question}}_third_answer">{{ question.third_answer }}</label><br />
+
+            <input type="radio" name="{{question.id}}" id="{{question}}_fourth_answer" value="4" />
+            <label for="{{question}}_fourth_answer">{{ question.fourth_answer }}</label><br />
+             </li>
+        {% endfor %}
+        <input type="submit" value="Submit" />
+        <input type="button" value="Cancel" onclick="window.location='{% url 'courses:exam' course_id %}';" />
+    </form>
+
+        </ul>
+    {% else %}
+        <p>No questions available.</p>
+    {% endif %}
+{% endblock %}

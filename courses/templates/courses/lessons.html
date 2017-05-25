@@ -5,9 +5,9 @@
 {% block content %}
 {% include 'course_css.html' %}
 <div class="cont_course">
-    {% if user.id == course_owner %} <!--######################-->
+    {% if user.id == course_owner %}
     <a class="btn btn-success btn-lg pull-right" href="{% url 'courses:create_lesson' course_id%}">Add a lesson</a>
-    {% endif %} <!--######################-->
+    {% endif %}
     <h1>Lessons</h1>
     <br>
     {% if latest_lessons_list %}
@@ -15,15 +15,16 @@
         {% for lesson in latest_lessons_list %}
          <li>
          <a href="{% url 'courses:lesson' course_id lesson.id %}">{{ lesson.lesson_name }}</a>
-         {% if user.id == course_owner %} <!--######################-->
+         {% if user.id == course_owner %}
          <a href="{% url 'courses:update_lesson' course_id lesson.id %}"><button type="button" class="btn btn-default btn-xs">Edit</button></a>
          <a href="{% url 'courses:delete_lesson' course_id lesson.id %}"><button type="button" class="btn btn-default btn-xs">Delete</button></span></a>
-         {% endif %} <!--######################-->
+         {% endif %}
          </li>
         {% endfor %}
         </ul>
     {% else %}
         <p>No lessons available.</p>
     {% endif %}
+    <a href="{% url 'courses:exam' course_id %}">Exam</a>
 </div>
 {% endblock %}

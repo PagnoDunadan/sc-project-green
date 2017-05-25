@@ -8,13 +8,13 @@
     <h1 class="word-size">{{course.course_name}}</h1>
     <br>
     <img class="course_pic" src="{{course.course_picture}}">
-    <br>    <!--########################################-->
-    <p class="text-align">{{course.course_about}}</p><br>         <!--########################################-->
+    <br>
+    <p class="text-align">{{course.course_about}}</p><br>
     <a href="{% url 'courses:lessons' course.id %}"><button class="btn btn-default btn-lg"><span class="glyphicon glyphicon-book"></span> Go to lessons</button></a>
 
-    {% if user == course.course_owner %}      <!--########################################-->
+    {% if user == course.course_owner %}
     <a href="{% url 'courses:delete_course' course.id %}"><button class="btn btn-default pull-right"><span class="glyphicon glyphicon-trash"></span> Delete</button></a> 
-    <a href="{% url 'courses:update_course' course.id %}"><button class="btn btn-success pull-right"><span class="glyphicon glyphicon-pencil"></span> Edit</button></a>   <!--########################################-->
+    <a href="{% url 'courses:update_course' course.id %}"><button class="btn btn-success pull-right"><span class="glyphicon glyphicon-pencil"></span> Edit</button></a>
     {% endif %}
 </div>
 {% endblock %}
