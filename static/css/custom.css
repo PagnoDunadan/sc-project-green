@@ -161,3 +161,14 @@ h3, h4{
 	padding-bottom: 0;
 	font-family: 'Open Sans', sans-serif;
 }
+p > label {
+    display:inline;
+}
+p > label:before {
+    content:"\a";
+    white-space: pre;
+}
+p > label:after {
+    content:"\a";
+    white-space: pre;
+}

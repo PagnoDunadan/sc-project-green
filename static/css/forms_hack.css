@@ -1,0 +1,18 @@
+h1 {
+	margin:0px;
+}
+p {
+	margin: 0px;
+	padding: 0px;
+}
+p > label {
+    display:inline;
+}
+p > label:before {
+    content:"\a";
+    white-space: pre;
+}
+p > label:after {
+    content:"\a";
+    white-space: pre;
+}
